@@ -244,6 +244,7 @@ export class AppComponent implements OnInit {
       )
       .subscribe({
         next: (data: ClassificationResponse) => {
+          this.loading = false;
           this.response = data;
           
           if (data.steps?.prechecks && data.steps.prechecks.length > 0) {
@@ -344,12 +345,14 @@ export class AppComponent implements OnInit {
             this.showTaskSelector = true;
             this.response = null;
             this.queryForm.patchValue({ query: '' });
+            this.loading = false;
             return;
           }
           
           this.response = data;
           this.queryForm.patchValue({ query: '' });
           this.showTaskSelector = false;
+          this.loading = false;
           
           if (data.steps && data.steps.prechecks && data.steps.prechecks.length > 0) {
             const firstAutoStep = data.steps.prechecks.find(step => step.autoExecutable);
