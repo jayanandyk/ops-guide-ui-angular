@@ -43,7 +43,6 @@
     <div *ngIf="showTaskSelector" class="task-selector-container">
       <div class="task-selector">
         <h3>⚠️ I couldn't understand that. What would you like to do?</h3>
-        <p class="original-query">Query: "{{ originalQuery }}"</p>
         <div class="task-options" *ngIf="availableTasks.length > 0; else noTasksAvailable">
           <div 
             *ngFor="let task of availableTasks" 
@@ -389,5 +388,8 @@
         </div>
       </div>
       </ng-container>
+      <button class="task-selector-dismiss" (click)="response = null" style="margin-top: 1rem;">
+        Dismiss
+      </button>
     </div>
   </div>
