@@ -1,12 +1,5 @@
 <div class="app">
   <div class="container">
-    <!-- Greeting -->
-    <div class="greeting">
-      <span class="greeting-icon">🌐</span>
-      <h1 class="greeting-text">{{ getGreeting() }}</h1>
-    </div>
-
-    <!-- Input Area -->
     <form class="input-container" [formGroup]="queryForm" (ngSubmit)="onSubmit()">
       <div class="input-box">
         <textarea
@@ -20,21 +13,6 @@
         ></textarea>
         
         <div class="input-footer">
-          <div class="input-footer-left">
-            <label for="file-upload" class="attach-button" title="Attach JPEG or PDF">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                <path d="M10 4V16M4 10H16" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
-              </svg>
-              <input
-                id="file-upload"
-                type="file"
-                accept=".jpeg,.jpg,.pdf,image/jpeg,application/pdf"
-                (change)="handleFileChange($event)"
-                style="display: none"
-              />
-            </label>
-          </div>
-          
           <div class="input-footer-right">
             <button
               type="submit"

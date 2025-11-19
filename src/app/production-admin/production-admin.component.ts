@@ -153,20 +153,6 @@ export class ProductionAdminComponent implements OnInit {
     });
   }
 
-  getGreeting(): string {
-    const hour = new Date().getHours();
-    
-    if (hour >= 5 && hour < 12) {
-      return 'Good morning';
-    } else if (hour >= 12 && hour < 17) {
-      return 'Good afternoon';
-    } else if (hour >= 17 && hour < 21) {
-      return 'Good evening';
-    } else {
-      return 'Good night';
-    }
-  }
-
   getObjectEntries(obj: Record<string, string | null>): Array<[string, string | null]> {
     return Object.entries(obj);
   }
@@ -196,24 +182,6 @@ export class ProductionAdminComponent implements OnInit {
 
   getStepTypeLabel(stepType: string): string {
     return stepType.charAt(0).toUpperCase() + stepType.slice(1);
-  }
-
-  handleFileChange(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    const files = input.files;
-    
-    if (files && files.length > 0) {
-      const file = files[0];
-      const fileType = file.type;
-      
-      if (fileType === 'image/jpeg' || fileType === 'image/jpg' || fileType === 'application/pdf') {
-        console.log('File selected:', file.name, fileType);
-        alert(`📎 File "${file.name}" selected (${fileType})`);
-      } else {
-        alert('⚠️ Please select only JPEG or PDF files');
-        input.value = '';
-      }
-    }
   }
 
   handleKeyDown(event: KeyboardEvent): void {
