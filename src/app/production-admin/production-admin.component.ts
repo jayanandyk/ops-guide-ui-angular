@@ -92,17 +92,7 @@ export class ProductionAdminComponent implements OnInit {
           this.setStepExecution(stepId, stepExecution);
           
           if (stepResponse.success) {
-            const currentGroup = response.steps?.[stepGroup as keyof StepGroups];
-            if (currentGroup) {
-              const nextStepIndex = stepIndex + 1;
-              const nextStep = currentGroup[nextStepIndex];
-              
-              if (nextStep && nextStep.autoExecutable) {
-                timer(500).subscribe(() => {
-                  this.executeStep(nextStepIndex, nextStep, response, stepGroup);
-                });
-              }
-            }
+            this.autoExecuteNextStep(stepIndex, stepGroup, response);
           }
         },
         error: (err: Error) => {
@@ -372,5 +362,38 @@ export class ProductionAdminComponent implements OnInit {
       ...this.stepExecutionsSubject.value,
       [stepId]: stepExecution
     });
+  }
+
+  private autoExecuteNextStep(currentIndex: number, stepGroup: string, response: ClassificationResponse): void {
+    const currentGroup = response.steps?.[stepGroup as keyof StepGroups];
+    if (currentGroup) {
+      const nextIndex = currentIndex + 1;
+      const nextStep = currentGroup[nextIndex];
+      if (nextStep && nextStep.autoExecutable) {
+        timer(500).subscribe(() => this.executeStep(nextIndex, nextStep, response, stepGroup));
+        return;
+      }
+    }
+
+    const groupOrder: Array<keyof StepGroups> = ['prechecks', 'procedure', 'postchecks', 'rollback'];
+    const currentGroupIdx = groupOrder.indexOf(stepGroup as keyof StepGroups);
+    if (currentGroupIdx === -1) {
+      return;
+    }
+
+    const nextGroupName = groupOrder[currentGroupIdx + 1];
+    if (!nextGroupName) {
+      return;
+    }
+
+    const nextGroup = response.steps?.[nextGroupName];
+    if (!nextGroup || nextGroup.length === 0) {
+      return;
+    }
+
+    const firstStep = nextGroup[0];
+    if (firstStep.autoExecutable) {
+      timer(500).subscribe(() => this.executeStep(0, firstStep, response, nextGroupName as string));
+    }
   }
 }
