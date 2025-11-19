@@ -4,10 +4,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
+import { ProductionAdminComponent } from './production-admin/production-admin.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ProductionAdminComponent
   ],
   imports: [
     BrowserModule,
