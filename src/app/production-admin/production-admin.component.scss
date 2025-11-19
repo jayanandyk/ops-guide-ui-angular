@@ -189,12 +189,17 @@
   border: none;
   border-radius: 10px;
   padding: 0.75rem;
-  background: rgba(15, 23, 42, 0.04);
+  background: linear-gradient(135deg, #2563eb, #3b82f6);
+  color: #fff;
+  font-weight: 600;
   cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.2);
 }
 
 .task-selector-dismiss:hover {
-  background: rgba(15, 23, 42, 0.08);
+  transform: translateY(-1px);
+  box-shadow: 0 12px 26px rgba(37, 99, 235, 0.3);
 }
 
 /** Response **/
@@ -326,20 +331,13 @@
 .step-button {
   border: none;
   border-radius: 10px;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 1.25rem;
   cursor: pointer;
-  font-weight: 500;
-  transition: background 0.2s ease, transform 0.2s ease;
-}
-
-.step-button.auto-execute {
-  background: rgba(37, 99, 235, 0.15);
-  color: #1d4ed8;
-}
-
-.step-button.approve {
-  background: rgba(234, 179, 8, 0.2);
-  color: #b45309;
+  font-weight: 600;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  background: linear-gradient(135deg, #2563eb, #3b82f6);
+  color: #fff;
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.2);
 }
 
 .step-button:disabled {
@@ -349,6 +347,7 @@
 
 .step-button:not(:disabled):hover {
   transform: translateY(-1px);
+  box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3);
 }
 
 .blocked-message,
