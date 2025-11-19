@@ -139,7 +139,7 @@
                         <button
                           *ngIf="!hasPreviousStepFailed(idx, 'prechecks', response) && !step.autoExecutable"
                           class="step-button approve"
-                          (click)="executeStep(idx, step, response, 'prechecks', true)"
+                          (click)="executeStep(idx, step, response, 'prechecks')"
                         >
                           Approve & Run
                         </button>
@@ -213,7 +213,7 @@
                         <button
                           *ngIf="!hasPreviousStepFailed(idx, 'procedure', response) && !step.autoExecutable"
                           class="step-button approve"
-                          (click)="executeStep(idx, step, response, 'procedure', true)"
+                          (click)="executeStep(idx, step, response, 'procedure')"
                         >
                           Approve & Run
                         </button>
@@ -287,7 +287,7 @@
                         <button
                           *ngIf="!hasPreviousStepFailed(idx, 'postchecks', response) && !step.autoExecutable"
                           class="step-button approve"
-                          (click)="executeStep(idx, step, response, 'postchecks', true)"
+                          (click)="executeStep(idx, step, response, 'postchecks')"
                         >
                           Approve & Run
                         </button>
@@ -361,7 +361,7 @@
                         <button
                           *ngIf="!hasPreviousStepFailed(idx, 'rollback', response) && !step.autoExecutable"
                           class="step-button approve"
-                          (click)="executeStep(idx, step, response, 'rollback', true)"
+                          (click)="executeStep(idx, step, response, 'rollback')"
                         >
                           Approve & Run
                         </button>

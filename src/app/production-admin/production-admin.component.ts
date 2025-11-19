@@ -44,7 +44,7 @@ export class ProductionAdminComponent implements OnInit {
     }, 0);
   }
 
-  executeStep(stepIndex: number, step: Step, response: ClassificationResponse, stepGroup: string, skipApproval = false): void {
+  executeStep(stepIndex: number, step: Step, response: ClassificationResponse, stepGroup: string): void {
     const stepId = `${response.taskId}-${stepGroup}-${stepIndex}`;
     this.executingSteps.add(stepId);
     
@@ -178,10 +178,6 @@ export class ProductionAdminComponent implements OnInit {
       case 'APPROVAL_REQUIRED': return '⏸';
       default: return '○';
     }
-  }
-
-  getStepTypeLabel(stepType: string): string {
-    return stepType.charAt(0).toUpperCase() + stepType.slice(1);
   }
 
   handleKeyDown(event: KeyboardEvent): void {
@@ -356,10 +352,6 @@ export class ProductionAdminComponent implements OnInit {
     } catch {
       return message;
     }
-  }
-
-  renderStepGroup(stepList: Step[], response: ClassificationResponse, stepGroup: string): Step[] {
-    return stepList;
   }
 
   private refreshView(): void {
