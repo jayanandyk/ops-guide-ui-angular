@@ -121,9 +121,6 @@
                       </div>
                     </div>
                     <div class="step-actions">
-                      <span class="step-status" [ngClass]="getStepStatusClass(stepExecutions[getStepId(response.taskId, 'prechecks', idx)]?.status)">
-                        {{ getStepStatusIcon(stepExecutions[getStepId(response.taskId, 'prechecks', idx)]?.status) }}
-                      </span>
                       <ng-container *ngIf="!stepExecutions[getStepId(response.taskId, 'prechecks', idx)] && !isExecuting(getStepId(response.taskId, 'prechecks', idx))">
                         <ng-container *ngIf="hasPreviousStepFailed(idx, 'prechecks', response)">
                           <span class="blocked-message" style="font-size: 0.85rem; color: #ff9800">⏸ Blocked by previous failure</span>
@@ -195,9 +192,6 @@
                       </div>
                     </div>
                     <div class="step-actions">
-                      <span class="step-status" [ngClass]="getStepStatusClass(stepExecutions[getStepId(response.taskId, 'procedure', idx)]?.status)">
-                        {{ getStepStatusIcon(stepExecutions[getStepId(response.taskId, 'procedure', idx)]?.status) }}
-                      </span>
                       <ng-container *ngIf="!stepExecutions[getStepId(response.taskId, 'procedure', idx)] && !isExecuting(getStepId(response.taskId, 'procedure', idx))">
                         <ng-container *ngIf="hasPreviousStepFailed(idx, 'procedure', response)">
                           <span class="blocked-message" style="font-size: 0.85rem; color: #ff9800">⏸ Blocked by previous failure</span>
@@ -269,9 +263,6 @@
                       </div>
                     </div>
                     <div class="step-actions">
-                      <span class="step-status" [ngClass]="getStepStatusClass(stepExecutions[getStepId(response.taskId, 'postchecks', idx)]?.status)">
-                        {{ getStepStatusIcon(stepExecutions[getStepId(response.taskId, 'postchecks', idx)]?.status) }}
-                      </span>
                       <ng-container *ngIf="!stepExecutions[getStepId(response.taskId, 'postchecks', idx)] && !isExecuting(getStepId(response.taskId, 'postchecks', idx))">
                         <ng-container *ngIf="hasPreviousStepFailed(idx, 'postchecks', response)">
                           <span class="blocked-message" style="font-size: 0.85rem; color: #ff9800">⏸ Blocked by previous failure</span>
@@ -343,9 +334,6 @@
                       </div>
                     </div>
                     <div class="step-actions">
-                      <span class="step-status" [ngClass]="getStepStatusClass(stepExecutions[getStepId(response.taskId, 'rollback', idx)]?.status)">
-                        {{ getStepStatusIcon(stepExecutions[getStepId(response.taskId, 'rollback', idx)]?.status) }}
-                      </span>
                       <ng-container *ngIf="!stepExecutions[getStepId(response.taskId, 'rollback', idx)] && !isExecuting(getStepId(response.taskId, 'rollback', idx))">
                         <ng-container *ngIf="hasPreviousStepFailed(idx, 'rollback', response)">
                           <span class="blocked-message" style="font-size: 0.85rem; color: #ff9800">⏸ Blocked by previous failure</span>
