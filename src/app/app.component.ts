@@ -197,10 +197,6 @@ export class AppComponent implements OnInit {
     return stepType.charAt(0).toUpperCase() + stepType.slice(1);
   }
 
-  isExecuting(stepId: string): boolean {
-    return this.executingSteps.has(stepId);
-  }
-
   handleFileChange(event: Event): void {
     const input = event.target as HTMLInputElement;
     const files = input.files;
@@ -301,6 +297,10 @@ export class AppComponent implements OnInit {
     }
   
     return false;
+  }
+
+  isExecuting(stepId: string): boolean {
+    return this.executingSteps.has(stepId);
   }
 
   ngOnInit(): void {
