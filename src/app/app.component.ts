@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, ChangeDetectorRef, ViewRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from './services/api.service';
 import { ClassificationResponse, Step, StepExecution, ApiRequest, StepExecutionRequest, AvailableTask, StepGroups } from './models/types';
@@ -25,7 +25,8 @@ export class AppComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private apiService: ApiService
+    private apiService: ApiService,
+    private cdr: ChangeDetectorRef
   ) {
     this.stepExecutions$ = this.stepExecutionsSubject.asObservable();
     this.queryForm = this.fb.group({
@@ -240,11 +241,11 @@ export class AppComponent implements OnInit {
       .pipe(
         finalize(() => {
           this.loading = false;
+          this.refreshView();
         })
       )
       .subscribe({
         next: (data: ClassificationResponse) => {
-          this.loading = false;
           this.response = data;
           
           if (data.steps?.prechecks && data.steps.prechecks.length > 0) {
@@ -256,10 +257,12 @@ export class AppComponent implements OnInit {
               });
             }
           }
+          this.refreshView();
         },
         error: (err: Error) => {
           this.error = err.message || 'An unknown error occurred';
           console.error('Error:', err);
+          this.refreshView();
         }
       });
   }
@@ -336,6 +339,7 @@ export class AppComponent implements OnInit {
       .pipe(
         finalize(() => {
           this.loading = false;
+          this.refreshView();
         })
       )
       .subscribe({
@@ -345,14 +349,13 @@ export class AppComponent implements OnInit {
             this.showTaskSelector = true;
             this.response = null;
             this.queryForm.patchValue({ query: '' });
-            this.loading = false;
+            this.refreshView();
             return;
           }
           
           this.response = data;
           this.queryForm.patchValue({ query: '' });
           this.showTaskSelector = false;
-          this.loading = false;
           
           if (data.steps && data.steps.prechecks && data.steps.prechecks.length > 0) {
             const firstAutoStep = data.steps.prechecks.find(step => step.autoExecutable);
@@ -363,10 +366,12 @@ export class AppComponent implements OnInit {
               });
             }
           }
+          this.refreshView();
         },
         error: (err: Error) => {
           this.error = err.message || 'An unknown error occurred';
           console.error('Error:', err);
+          this.refreshView();
         }
       });
   }
@@ -387,6 +392,14 @@ export class AppComponent implements OnInit {
 
   renderStepGroup(stepList: Step[], response: ClassificationResponse, stepGroup: string): Step[] {
     return stepList;
+  }
+
+  private refreshView(): void {
+    const viewRef = this.cdr as ViewRef;
+    if (viewRef.destroyed) {
+      return;
+    }
+    this.cdr.detectChanges();
   }
 
   private resetStepState(): void {
