@@ -246,15 +246,11 @@
   padding: 1.25rem;
   margin-top: 1.5rem;
   background: #fafcff;
-  position: relative;
 }
 
 .step-group-header {
-  position: absolute;
-  top: -12px;
-  left: 16px;
-  background: #fafcff;
-  padding: 0 0.75rem;
+  margin-bottom: 1rem;
+  padding: 0;
   font-weight: 600;
   color: #2563eb;
   text-transform: capitalize;
